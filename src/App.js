@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import "./App.css";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import EventPage from "./components/EventPage";
+import EventForm from "./components/EventForm";
+import {getUser} from "./services/User";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Login/>}>
+                </Route>
+                <Route path="/register" element={<Register/>}>
+                </Route>
+                <Route path="/events" element={
+                    <PrivateRoute>
+                        <EventPage/>
+                    </PrivateRoute>
+                }>
+                </Route>
+                <Route path="/events/new" element={
+                    <PrivateRoute>
+                        <EventForm/>
+                    </PrivateRoute>
+                }>
+                </Route>
+                <Route path="/events/:id" element={
+                    <PrivateRoute>
+                        <EventForm/>
+                    </PrivateRoute>
+                }>
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
+}
+
+function PrivateRoute({children}) {
+    const user = getUser();
+    return user ? children : <Navigate to="/"/>;
 }
 
 export default App;
