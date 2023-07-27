@@ -77,7 +77,7 @@ export default function Login() {
         <div className="card">
             <div className="form">
                 <div className="title">
-                    <p>Login</p>
+                    <p>Login Test</p>
                 </div>
                 {
                     !!errors.not_registered && <span className="mandatory">{errors.not_registered}</span>
