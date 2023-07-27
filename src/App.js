@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import EventPage from "./components/EventPage";
 import EventForm from "./components/EventForm";
 import {getUser} from "./services/User";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     return (
